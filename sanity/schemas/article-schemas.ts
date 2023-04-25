@@ -1,8 +1,8 @@
 import { SanityDocs } from "./types";
 
-const project: SanityDocs = {
-  name: "project",
-  title: "Projects",
+const article: SanityDocs = {
+  name: "articles",
+  title: "Articles",
   type: "document",
   fields: [
     {
@@ -29,12 +29,16 @@ const project: SanityDocs = {
       type: "url",
     },
     {
-      name: "content",
-      title: "Content",
-      type: "array",
-      of: [{ type: "block" }],
+      name: "summary",
+      title: "Summary",
+      type: "string",
+    },
+    {
+      name: "duration",
+      title: "Duration",
+      type: "string",
     },
   ],
 };
 
-export default project;
+export default article;
