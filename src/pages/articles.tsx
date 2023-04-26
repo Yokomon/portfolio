@@ -1,10 +1,10 @@
 import Head from "next/head";
 import React from "react";
-import { AnimatedText } from "../components/AnimatedText";
 import Layout from "../components/Layout";
 import { getArticles } from "@/sanity/schemas/sanity-utils";
 import { ArticlesProps } from "@/types/Articles";
-import { FeaturedArticles } from "../components/articles";
+import { FeaturedArticles } from "@/components/articles";
+import { AnimatedText } from "@/components/common";
 
 const articles: React.FC<ArticlesProps> = ({ articles }) => {
   return (
