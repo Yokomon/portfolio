@@ -1,9 +1,13 @@
-import { Article, Project } from "@/types/Project";
-import { createClient, groq } from "next-sanity";
-import { clientConfig } from "../config/client-config";
+import { IndexData } from '@/types/Component'
+import { Article, Project } from '@/types/Project'
+import { createClient, groq } from 'next-sanity'
+import { clientConfig } from '../config/client-config'
+
+export const formatSanityDate = (date: Date) =>
+  new Date(date).toLocaleDateString('en-NG').replaceAll('/', '-')
 
 export async function getProjects(): Promise<Project> {
-  const client = createClient(clientConfig);
+  const client = createClient(clientConfig)
 
   return client.fetch(
     groq`*[_type == "project"]{
@@ -14,12 +18,12 @@ export async function getProjects(): Promise<Project> {
         url,
         content,
         "image": image.asset -> url
-    }`
-  );
+    }`,
+  )
 }
 
 export async function getProject(slug: string): Promise<Project> {
-  const client = createClient(clientConfig);
+  const client = createClient(clientConfig)
 
   return client.fetch(
     groq`*[_type == "project" && slug.current == $slug][0]{
@@ -31,12 +35,12 @@ export async function getProject(slug: string): Promise<Project> {
         summary,
         "image": image.asset -> url
     }`,
-    { slug }
-  );
+    { slug },
+  )
 }
 
-export async function getArticles(): Promise<Article> {
-  const client = createClient(clientConfig);
+export async function getArticles(): Promise<Article[]> {
+  const client = createClient(clientConfig)
 
   return client.fetch(
     groq`*[_type == 'articles']{
@@ -46,7 +50,22 @@ export async function getArticles(): Promise<Article> {
       "image": image.asset -> url,
       url,
       summary,
-      "slug": slug.current
-    }`
-  );
+      "slug": slug.current,
+      duration
+    }`,
+  )
+}
+
+export async function getIndexData(): Promise<IndexData> {
+  const client = createClient(clientConfig)
+
+  return client.fetch(
+    groq`*[_type == 'home'][0]{
+      "lightImage": lightImage.asset -> url,
+      "darkImage": darkImage.asset -> url,
+      "resume": resume.asset -> url,
+      intro,
+      summary
+    }`,
+  )
 }
