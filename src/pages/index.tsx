@@ -19,8 +19,8 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
       </Head>
       <main className='flex text-dark w-full min-h-screen'>
         <Layout>
-          <div className='flex justify-between items-center w-full h-screen'>
-            <div className='w-1/2'>
+          <div className='flex justify-between items-center w-full flex-col md:flex-row'>
+            <div className='w-full lg:w-1/2 md:hidden lg:block'>
               <FramerImage
                 initial={{
                   opacity: 0,
@@ -29,16 +29,20 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
                   opacity: 1,
                   transition: { duration: 1.5 },
                 }}
+                sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
                 width={420}
                 height={200}
                 src={theme === 'light' ? lightImage : darkImage}
                 alt={'Profile pic'}
-                className='w-full h-auto'
+                className='w-full h-auto my-12'
                 priority
               />
             </div>
-            <div className='w-1/2 p-8'>
-              <AnimatedText text={intro} />
+            <div className='w-full lg:w-1/2 lg:p-8 md:mt-32 lg:mt-0'>
+              <AnimatedText
+                text={intro}
+                className='text-[30px] leading-8 sm:leading-none text-center sm:text-5xl sm:text-left'
+              />
               <motion.p
                 initial={{
                   opacity: 0,
@@ -49,13 +53,13 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
                   x: 0,
                   transition: { duration: 1 },
                 }}
-                className='text-base font-medium my-4 dark:text-slate-400'
+                className='font-medium leading-[1.7] sm:leading-normal dark:text-slate-400 text-sm sm:text-base text-center sm:text-left my-8 sm:my-0'
               >
                 {summary}
               </motion.p>
-              <div className='flex items-center self-start'>
+              <div className='flex items-center self-start justify-center sm:justify-start my-4'>
                 <Link
-                  className='bg-dark border border-dark dark:border-slate-400 dark:text-slate-400 dark:bg-slate-900 font-semibold px-6 duration-500 hover:bg-light text-light hover:text-dark p-3 rounded-lg'
+                  className='bg-dark border border-dark dark:border-slate-400 dark:text-slate-400 dark:bg-slate-900 font-semibold px-6 duration-500 hover:bg-light text-light hover:text-dark p-2 md:p-3 text-sm md:text-base rounded-lg'
                   href={resume}
                   download={true}
                   target='_blank'
@@ -63,7 +67,7 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
                   Resume
                 </Link>
                 <Link
-                  className='font-medium underline underline-offset-4 px-6 text-dark dark:text-slate-400 ml-6 p-3'
+                  className='font-medium underline px-6 text-dark dark:text-slate-400 text-sm sm:text-base underline-offset-8 ml-6 p-3'
                   href='mailto:marowmacaulay@gmail.com'
                   target='_blank'
                 >
@@ -73,8 +77,8 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
             </div>
           </div>
         </Layout>
-        <div className='absolute right-8 bottom-8 inline-block w-48'>
-          <GiLightBulb size={230} className='w-full h-auto text-yellow-300' />
+        <div className='absolute right-3 -bottom-8 w-48 md:-bottom-18 lg:-bottom-24 hidden md:inline-block'>
+          <GiLightBulb size={100} className='w-full h-auto text-yellow-300' />
         </div>
       </main>
     </>
