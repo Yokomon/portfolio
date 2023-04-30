@@ -14,8 +14,9 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        circularLight: 'repeating-radial-gradient(rgba(0,0,0,0.4) 2px, #f5f5f5 5px, #f5f5f5 100px)',
-        circularDark: 'repeating-radial-gradient(rgba(0,0,0,0.4) 2px, #f5f5f5 0px, #0F172A 132px)',
+        circularLight: 'repeating-radial-gradient(rgba(0,0,0,0.4) 2px, #f5f5f5 5px, #fff 100px)',
+        circularDark:
+          'repeating-radial-gradient(rgba(255,255,255,0.5) 2px, #0F172A 8px, #ffffff47 250px)',
       },
       fontFamily: {
         mont: ['var(--font-mont)', ...fontFamily.sans],
