@@ -20,6 +20,7 @@
     "camelcase": "error",
     "spaced-comment": "error",
     "quotes": ["error", "single"],
+    "react/prop-types": "off",
     "no-duplicate-imports": "error"
   },
   "settings": {
