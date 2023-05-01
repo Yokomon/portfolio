@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useScroll, motion } from 'framer-motion'
 import { SlLocationPin } from 'react-icons/sl'
+import { MdAccessTime } from 'react-icons/md'
 import { PortableText } from '@portabletext/react'
 
 import { Details as DetailsProps } from '@/types/About'
@@ -44,9 +45,15 @@ const Details: React.FC<DetailsProps> = ({
             </a>
           </p>
         </h3>
-        <span className='capitalize flex items-center font-medium text-dark/75 dark:text-slate-400 text-base'>
-          <SlLocationPin className='mr-2 text-primary dark:text-orange-500' />
-          {duration} | {address}
+        <span className='capitalize flex flex-col items-start sm:flex-row sm:items-center font-medium text-dark/75 dark:text-slate-400 text-base'>
+          <span className='flex items-center'>
+            <MdAccessTime className='mr-2 text-primary dark:text-orange-500' /> {duration}
+          </span>
+          &nbsp; | &nbsp;
+          <span className='flex items-center'>
+            <SlLocationPin className='mr-2 text-primary dark:text-orange-500' />
+            {address}
+          </span>
         </span>
         <ul className='dark:text-slate-400 my-2'>
           <PortableText
