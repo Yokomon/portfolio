@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
 interface AnimatedTextProps {
-  text: string;
-  className?: string;
-  textWrapper?: string;
+  text: string
+  className?: string
+  textWrapper?: string
 }
 
 const quote = {
@@ -17,7 +17,7 @@ const quote = {
       staggerChildren: 0.1,
     },
   },
-};
+}
 
 const singleWord = {
   initial: {
@@ -31,35 +31,27 @@ const singleWord = {
       duration: 1.5,
     },
   },
-};
+}
 
-const AnimatedText: React.FC<AnimatedTextProps> = ({
-  text,
-  className = "",
-  textWrapper,
-}) => {
+const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = '', textWrapper }) => {
   return (
     <div
-      className={`w-full mx-auto overflow-hidden flex justify-center items-center py-2 ${textWrapper}`}
+      className={`w-full mx-auto overflow-hidden flex justify-center items-center py-0 sm:py-2 ${textWrapper}`}
     >
       <motion.h1
         variants={quote}
-        initial="initial"
-        animate="animate"
-        className={`inline-block w-full text-dark font-bold capitalize text-5xl ${className}`}
+        initial='initial'
+        animate='animate'
+        className={`w-full text-dark dark:text-slate-400 font-bold capitalize text-5xl ${className}`}
       >
-        {text.split(" ").map((word, idx) => (
-          <motion.span
-            variants={singleWord}
-            key={word + "_" + idx}
-            className={"inline-block"}
-          >
+        {text.split(' ').map((word, idx) => (
+          <motion.span variants={singleWord} key={word + '_' + idx} className={'inline-block'}>
             {word}&nbsp;
           </motion.span>
         ))}
       </motion.h1>
     </div>
-  );
-};
+  )
+}
 
-export default AnimatedText;
+export default AnimatedText

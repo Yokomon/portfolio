@@ -15,7 +15,7 @@ import Skill from './Skill'
 export default function Skills() {
   return (
     <>
-      <h2 className='font-bold text-5xl lg:text-8xl mt-24 md:mt-64 pb-16 w-full text-center dark:text-slate-400'>
+      <h2 className='font-bold text-5xl lg:text-8xl mt-16 md:mt-64 pb-10 sm:pb-16 w-full text-center dark:text-slate-400'>
         Skills
       </h2>
       <div className='w-full relative flex items-center justify-center rounded-full bg-circularLight dark:bg-circularDark my-8 h-[50vh] sm:h-[60vh] md:[80vh] lg:h-screen'>

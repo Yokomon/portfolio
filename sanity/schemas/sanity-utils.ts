@@ -1,3 +1,4 @@
+import { AboutData } from '@/types/About'
 import { IndexData } from '@/types/Component'
 import { Article, Project } from '@/types/Project'
 import { createClient, groq } from 'next-sanity'
@@ -66,6 +67,22 @@ export async function getIndexData(): Promise<IndexData> {
       "resume": resume.asset -> url,
       intro,
       summary
+    }`,
+  )
+}
+
+export async function getAboutData(): Promise<AboutData> {
+  const client = createClient(clientConfig)
+
+  return client.fetch(
+    groq`*[_type == 'about'][0]{
+      "lightImage": lightImage.asset -> url,
+      "darkImage": darkImage.asset -> url,
+      _id,
+      _createdAt,
+      biography,
+      stats,
+      experience
     }`,
   )
 }

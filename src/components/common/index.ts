@@ -1,3 +1,4 @@
-import FramerImage from "./FramerImage";
+import FramerImage from './FramerImage'
+import AnimatedText from './AnimatedText'
 
-export { FramerImage };
+export { FramerImage, AnimatedText }
