@@ -7,9 +7,10 @@ import Layout from '../components/Layout'
 import { AnimatedText, FramerImage } from '@/components/common'
 import { GiLightBulb } from 'react-icons/gi'
 import { ComponentProps } from '@/types/Component'
+import { BsDownload } from 'react-icons/bs'
 
 const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
-  const { summary, intro, darkImage, lightImage, resume } = indexData!
+  const { summary, intro, darkImage, lightImage, resume } = indexData
   return (
     <>
       <Head>
@@ -59,12 +60,13 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
               </motion.p>
               <div className='flex items-center self-start justify-center sm:justify-start my-4'>
                 <Link
-                  className='bg-dark border border-dark dark:border-slate-400 dark:text-slate-400 dark:bg-slate-900 font-semibold px-6 duration-500 hover:bg-light text-light hover:text-dark p-2 md:p-3 text-sm md:text-base rounded-lg'
+                  className='bg-dark border border-dark dark:border-slate-400 dark:text-slate-400 dark:bg-slate-900 font-semibold px-6 duration-500 hover:bg-light text-light hover:text-dark p-2 md:p-3 text-sm md:text-base rounded-lg flex items-center'
                   href={resume}
                   download={true}
                   target='_blank'
                 >
                   Resume
+                  <BsDownload size={24} className='hidden sm:block ml-5' />
                 </Link>
                 <Link
                   className='font-medium underline px-6 text-dark dark:text-slate-400 text-sm sm:text-base underline-offset-8 ml-6 p-3'
