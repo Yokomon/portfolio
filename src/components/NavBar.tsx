@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from 'react'
+import React, { SetStateAction, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Logo } from './Logo'
 import { mobileSocialLinks, socalLinks } from './Links'
@@ -15,10 +15,23 @@ interface NavBarProps {
 
 const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const defaultTheme = [Theme.light, Theme.default].includes(mode)
+
+  useEffect(() => {
+    // Prevent scrolling when navbar is active
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
 
   const handleMenu = () => {
     setIsOpen(!isOpen)
   }
+
+  const handleDarkMode = () => setMode(defaultTheme ? Theme.dark : Theme.light)
+
   return (
     <header className='w-full px-5 sm:px-18 lg:px-32 py-8 font-medium flex items-center justify-between dark:bg-slate-900 relative'>
       <button
@@ -42,7 +55,14 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
         ></span>
       </button>
 
-      <div className='w-full justify-between items-center hidden lg:flex'>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 0.5 },
+        }}
+        className='w-full justify-between items-center hidden lg:flex'
+      >
         <nav>
           <CustomLink href={'/'} title='Home' className='mr-4' />
           <CustomLink href={'/about'} title='About' className='mx-3' />
@@ -57,10 +77,7 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
             </Link>
           ))}
 
-          <button
-            className='mx-8'
-            onClick={() => setMode(mode === Theme.light ? Theme.dark : Theme.light)}
-          >
+          <button className='mx-8' onClick={handleDarkMode}>
             {mode === 'dark' ? (
               <HiLightBulb
                 size={30}
@@ -71,7 +88,7 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
             )}
           </button>
         </nav>
-      </div>
+      </motion.div>
 
       {isOpen && (
         <motion.div
@@ -100,10 +117,7 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
               </Link>
             ))}
 
-            <button
-              className='mx-8 my-4'
-              onClick={() => setMode(mode === Theme.light ? Theme.dark : Theme.light)}
-            >
+            <button className='mx-8 my-4' onClick={handleDarkMode}>
               {mode === 'dark' ? (
                 <HiLightBulb
                   size={30}
