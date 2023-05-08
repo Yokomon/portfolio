@@ -1,32 +1,30 @@
 import { AboutData } from '@/types/About'
 import { IndexData } from '@/types/Component'
 import { Article, Project } from '@/types/Project'
-import { createClient, groq } from 'next-sanity'
+import { groq } from 'next-sanity'
 import { clientConfig } from '../config/client-config'
 
 export const formatSanityDate = (date: Date) =>
   new Date(date).toLocaleDateString('en-NG').replaceAll('/', '-')
 
 export async function getProjects(): Promise<Project> {
-  const client = createClient(clientConfig)
-
-  return client.fetch(
+  return clientConfig.fetch(
     groq`*[_type == "project"]{
         _id,
         _createdAt,
         name,
         "slug": slug.current,
         url,
-        content,
-        "image": image.asset -> url
+        summary,
+        "image": image.asset -> url,
+        githubUrl,
+        featured
     }`,
   )
 }
 
 export async function getProject(slug: string): Promise<Project> {
-  const client = createClient(clientConfig)
-
-  return client.fetch(
+  return clientConfig.fetch(
     groq`*[_type == "project" && slug.current == $slug][0]{
         _id,
         _createdAt,
@@ -41,9 +39,7 @@ export async function getProject(slug: string): Promise<Project> {
 }
 
 export async function getArticles(): Promise<Article[]> {
-  const client = createClient(clientConfig)
-
-  return client.fetch(
+  return clientConfig.fetch(
     groq`*[_type == 'articles']{
       _id,
       _createdAt,
@@ -58,9 +54,7 @@ export async function getArticles(): Promise<Article[]> {
 }
 
 export async function getIndexData(): Promise<IndexData> {
-  const client = createClient(clientConfig)
-
-  return client.fetch(
+  return clientConfig.fetch(
     groq`*[_type == 'home'][0]{
       "lightImage": lightImage.asset -> url,
       "darkImage": darkImage.asset -> url,
@@ -72,12 +66,16 @@ export async function getIndexData(): Promise<IndexData> {
 }
 
 export async function getAboutData(): Promise<AboutData> {
-  const client = createClient(clientConfig)
-
-  return client.fetch(
+  return clientConfig.fetch(
     groq`*[_type == 'about'][0]{
-      "lightImage": lightImage.asset -> url,
-      "darkImage": darkImage.asset -> url,
+      "lightImage": lightImage.asset -> {
+        url,
+        metadata
+      },
+      "darkImage": darkImage.asset -> {
+        url,
+        metadata
+      },
       _id,
       _createdAt,
       biography,
