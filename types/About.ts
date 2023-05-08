@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons'
-import { PortableTextBlock } from 'sanity'
+import { ImageMetadata, PortableTextBlock } from 'sanity'
 
 export interface AnimatedNumbersProps {
   value: number
@@ -39,8 +39,14 @@ export interface AboutData {
   _id: string
   _createdAt: Date
   name: string
-  darkImage: string
-  lightImage: string
+  darkImage: {
+    url: string
+    metadata: ImageMetadata
+  }
+  lightImage: {
+    url: string
+    metadata: ImageMetadata
+  }
   biography: PortableTextBlock[]
   stats: Stats[]
   experience: Experience[]

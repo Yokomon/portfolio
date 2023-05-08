@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 interface Layout {
   children: string | JSX.Element | JSX.Element[]
   className?: string
@@ -5,7 +7,11 @@ interface Layout {
 const Layout: React.FC<Layout> = ({ children, className = '' }) => {
   return (
     <div
-      className={`w-full h-full z-0 inline-block bg-light dark:bg-slate-900 px-5 sm:px-20 xl:px-32 ${className}`}
+      className={clsx({
+        [className]: className,
+        ['w-full h-full z-0 inline-block bg-light dark:bg-slate-900 px-5 sm:px-12 lg:px-32 xl:px-0 xl:container xl:mx-auto']:
+          true,
+      })}
     >
       {children}
     </div>
