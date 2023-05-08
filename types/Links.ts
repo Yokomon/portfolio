@@ -7,6 +7,7 @@ export interface SocialLinks {
   className: string
   fill: string
   linkStyles: string
+  name: string
 }
 
 export interface CustomLink {
@@ -14,4 +15,10 @@ export interface CustomLink {
   className?: string
   title: string
   toggle?: () => void
+}
+
+export interface SanityImageLoader {
+  src: string
+  width: string
+  quality: number
 }

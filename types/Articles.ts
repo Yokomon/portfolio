@@ -1,15 +1,21 @@
-import { Article } from "./Project";
+import { Article } from './Project'
 
 interface ArticlesProps {
-  articles: Article[];
+  articles: Article[]
 }
 
 interface FeaturedArticlesInterface {
-  link: string;
-  imgSrc: string;
-  title: string;
-  duration: string;
-  summary: string;
+  link: string
+  imgSrc: string
+  title: string
+  duration: string
+  summary: string
 }
 
-export type { FeaturedArticlesInterface, ArticlesProps };
+interface ArticleComponent {
+  title: string
+  date: string | Date
+  link: string
+}
+
+export type { FeaturedArticlesInterface, ArticlesProps, ArticleComponent }
