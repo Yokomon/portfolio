@@ -38,10 +38,10 @@ const Details: React.FC<DetailsProps> = ({
             <a
               href={companyLink}
               target='_blank'
-              className='text-primary dark:text-orange-500/75 capitalize'
+              className='text-primary dark:text-orange-500/75 capitalize hover:underline hover:underline-offset-4'
               rel='noreferrer'
             >
-              @{company}
+              @ {company}
             </a>
           </p>
         </h3>
