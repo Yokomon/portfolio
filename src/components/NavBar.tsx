@@ -33,8 +33,9 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
   const handleDarkMode = () => setMode(defaultTheme ? Theme.dark : Theme.light)
 
   return (
-    <header className='w-full px-5 sm:px-18 lg:px-32 py-8 font-medium flex items-center justify-between dark:bg-slate-900 relative'>
+    <header className='w-full px-5 sm:px-12 lg:px-32 py-8 font-medium flex items-center justify-between dark:bg-slate-900 relative'>
       <button
+        aria-label='nav'
         className='flex-col justify-center items-center duration-300 flex lg:hidden'
         onClick={handleMenu}
       >
@@ -71,13 +72,13 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
         </nav>
 
         <nav className='flex items-center justify-between flex-wrap'>
-          {socalLinks.map(({ href, icon, fill, className, linkStyles }, idx) => (
-            <Link href={href} target='_blank' className={linkStyles} key={idx}>
+          {socalLinks.map(({ href, icon, fill, className, name, linkStyles }, idx) => (
+            <Link href={href} target='_blank' aria-label={name} className={linkStyles} key={idx}>
               {React.createElement(icon, { size: 35, className, fill })}
             </Link>
           ))}
 
-          <button className='mx-8' onClick={handleDarkMode}>
+          <button className='mx-8' aria-label='theme' onClick={handleDarkMode}>
             {mode === 'dark' ? (
               <HiLightBulb
                 size={30}
@@ -111,13 +112,13 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
           </nav>
 
           <nav className='flex items-center justify-center flex-wrap mt-2'>
-            {mobileSocialLinks.map(({ href, icon, fill, className, linkStyles }, idx) => (
-              <Link href={href} target='_blank' className={linkStyles} key={idx}>
+            {mobileSocialLinks.map(({ href, icon, fill, className, name, linkStyles }, idx) => (
+              <Link href={href} target='_blank' aria-label={name} className={linkStyles} key={idx}>
                 {React.createElement(icon, { size: 35, className, fill })}
               </Link>
             ))}
 
-            <button className='mx-8 my-4' onClick={handleDarkMode}>
+            <button className='mx-8 my-4' type='button' aria-label='theme' onClick={handleDarkMode}>
               {mode === 'dark' ? (
                 <HiLightBulb
                   size={30}
