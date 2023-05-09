@@ -1,4 +1,5 @@
 import { AboutData } from './About'
+import { MetaProps } from './Meta'
 
 export interface ComponentProps {
   indexData: IndexData
@@ -11,6 +12,7 @@ export interface IndexData {
   resume: string
   lightImage: string
   darkImage: string
+  seo: MetaProps
 }
 
 export interface AboutProps {

@@ -60,7 +60,11 @@ export async function getIndexData(): Promise<IndexData> {
       "darkImage": darkImage.asset -> url,
       "resume": resume.asset -> url,
       intro,
-      summary
+      summary,
+      seo{
+        ...,
+        "ogImage": ogImage.asset -> url 
+      }
     }`,
   )
 }

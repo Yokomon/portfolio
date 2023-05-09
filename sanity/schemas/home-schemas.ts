@@ -39,6 +39,50 @@ const Home = {
         },
       ],
     },
+    {
+      name: 'seo',
+      title: 'Seo details',
+      type: 'object',
+      fields: [
+        {
+          name: 'description',
+          title: 'Description',
+          type: 'string',
+        },
+        {
+          name: 'keywords',
+          title: 'Keywords',
+          type: 'string',
+        },
+        {
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+        },
+        {
+          name: 'ogTitle',
+          title: 'OG Title',
+          type: 'string',
+        },
+        {
+          name: 'ogType',
+          title: 'OG Type',
+          type: 'string',
+        },
+        {
+          name: 'ogUrl',
+          title: 'OG Url',
+          type: 'string',
+        },
+        {
+          name: 'ogImage',
+          title: 'OG Image',
+          type: 'image',
+          options: { hotspot: true },
+          fields: [{ name: 'alt', title: 'Alt', type: 'string' }],
+        },
+      ],
+    },
   ],
 }
 
