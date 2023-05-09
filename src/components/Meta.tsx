@@ -18,7 +18,7 @@ export const Meta: React.FC<MetaProps> = ({
       <meta property='og:title' content={ogTitle} />
       <meta property='og:type' content={ogType} />
       <meta property='og:url' content={ogUrl} />
-      <meta property='og:image' content={ogImage} />
+      <meta property='og:image' itemProp='image' content={ogImage} />
       <meta charSet='utf-8'></meta>
       <link rel='icon' href='/favicon.ico'></link>
       <title>{title}</title>
