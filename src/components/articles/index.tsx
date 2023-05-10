@@ -22,7 +22,7 @@ const Article: React.FC<ArticleComponent> = ({ title, date, link }) => {
         </h2>
       </Link>
       <span className='text-primary dark:text-orange-500 font-semibold text-sm sm:text-base pl-0 p-2 sm:p-4'>
-        {date as string}{' '}
+        {date as string}
       </span>
     </motion.li>
   )

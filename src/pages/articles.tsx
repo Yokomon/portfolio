@@ -42,8 +42,8 @@ const articles: React.FC<ArticlesProps> = ({ articles, seo }) => {
             All articles
           </h2>
           <ul>
-            {articles.map(({ name, _createdAt, url }, idx) => (
-              <Article key={idx} title={name} date={_createdAt} link={url} />
+            {articles.map(({ name, updatedAt, url }, idx) => (
+              <Article key={idx} title={name} date={updatedAt} link={url} />
             ))}
           </ul>
         </Layout>
@@ -55,8 +55,8 @@ const articles: React.FC<ArticlesProps> = ({ articles, seo }) => {
 export async function getStaticProps() {
   const { items, seo } = await getArticles()
 
-  const transformedResponse = items.map(({ _createdAt, ...article }) => ({
-    _createdAt: formatSanityDate(_createdAt),
+  const transformedResponse = items.map(({ updatedAt, ...article }) => ({
+    updatedAt: formatSanityDate(updatedAt),
     ...article,
   }))
 

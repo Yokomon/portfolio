@@ -92,6 +92,13 @@ const article = defineType({
               title: 'Duration',
               type: 'string',
             },
+            {
+              title: 'Updated at',
+              name: 'updatedAt',
+              type: 'date',
+              hidden: true,
+              initialValue: new Date().toISOString(),
+            },
           ],
         },
       ],
