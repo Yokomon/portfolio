@@ -3,7 +3,7 @@ import { MetaProps } from './Meta'
 
 export type ArticleItems = {
   _id: string
-  _createdAt: Date
+  updatedAt: Date
   name: string
   slug: string
   image: {
