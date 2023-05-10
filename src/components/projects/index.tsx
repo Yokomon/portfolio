@@ -9,11 +9,13 @@ const Project: React.FC<FeaturedProjectProps> = ({ url, name, image, featured, g
     <div className='absolute top-1 sm:top-0 -right-1.5 sm:-right-3 -z-10 w-[101%] h-[102%] sm:h-[103%] rounded-[2rem] bg-dark dark:bg-slate-300' />
     <Link href={url} target='_blank' className='cursor-pointer overflow-hidden rounded-lg'>
       <FramerImage
-        src={image}
+        src={image.url}
         alt={name}
         className='w-full h-auto'
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.2 }}
+        placeholder='blur'
+        blurDataURL={image.metadata.lqip}
       />
     </Link>
     <div className='flex flex-col justify-between'>
@@ -57,15 +59,17 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = ({
         className='cursor-pointer overflow-hidden rounded-lg w-full border border-dark dark:border-0 sm:w-1/2'
       >
         <FramerImage
-          src={image}
+          src={image.url}
           alt={name}
           className='w-full h-full'
           whileHover={{ scale: 1.05 }}
           sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
           priority
           width={400}
-          height={200}
+          height={250}
           transition={{ duration: 0.2 }}
+          placeholder='blur'
+          blurDataURL={image.metadata.lqip}
         />
       </Link>
       <div className='w-full sm:w-1/2 flex flex-col items-start justify-between px-0 sm:pl-6'>
