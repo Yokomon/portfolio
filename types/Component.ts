@@ -1,4 +1,4 @@
-import { AboutData } from './About'
+import { ImageMetadata } from 'sanity'
 import { MetaProps } from './Meta'
 
 export interface ComponentProps {
@@ -10,12 +10,13 @@ export interface IndexData {
   summary: string
   intro: string
   resume: string
-  lightImage: string
-  darkImage: string
+  lightImage: {
+    url: string
+    metadata: ImageMetadata
+  }
+  darkImage: {
+    url: string
+    metadata: ImageMetadata
+  }
   seo: MetaProps
-}
-
-export interface AboutProps {
-  theme: string
-  data: AboutData
 }

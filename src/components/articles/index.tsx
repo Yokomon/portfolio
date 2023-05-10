@@ -43,15 +43,17 @@ const FeaturedArticles: React.FC<FeaturedArticlesInterface> = ({
         className='cursor-pointer overflow-hidden rounded-lg inline-block w-full'
       >
         <FramerImage
-          src={imgSrc}
+          src={imgSrc.url}
           alt={title}
           className='w-full h-auto'
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
           width={440}
+          placeholder='blur'
+          blurDataURL={imgSrc.metadata.lqip}
           sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
           priority
-          height={250}
+          height={230}
         />
       </Link>
       <Link href={link} target='_blank' className=' block w-fit'>
