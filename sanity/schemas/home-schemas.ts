@@ -1,4 +1,6 @@
-const Home = {
+import { defineType } from 'sanity'
+
+const Home = defineType({
   name: 'home',
   title: 'Home',
   type: 'document',
@@ -84,6 +86,6 @@ const Home = {
       ],
     },
   ],
-}
+})
 
 export default Home
