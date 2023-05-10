@@ -38,10 +38,12 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
                 }}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
                 width={420}
-                height={200}
-                src={defaultTheme ? lightImage : darkImage}
+                height={600}
+                src={defaultTheme ? lightImage.url : darkImage.url}
                 alt={'Profile pic'}
                 className='w-full h-auto my-12'
+                placeholder='blur'
+                blurDataURL={defaultTheme ? lightImage.metadata.lqip : darkImage.metadata.lqip}
                 priority
               />
             </div>
