@@ -99,6 +99,7 @@ export async function getStaticProps() {
     props: {
       indexData,
     },
+    revalidate: 10,
   }
 }
 

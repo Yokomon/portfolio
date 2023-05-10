@@ -57,6 +57,7 @@ export async function getStaticProps() {
     props: {
       articles: transformedResponse,
     },
+    revalidate: 10,
   }
 }
 
