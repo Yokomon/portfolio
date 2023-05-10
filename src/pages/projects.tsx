@@ -1,21 +1,25 @@
-import Head from 'next/head'
 import { AnimatedText } from '@/components/common'
 import Layout from '@/components/Layout'
 import { getProjects } from '@/sanity/schemas/sanity-utils'
 import { ProjectProps } from '@/types/Project'
 import { FeaturedProject } from '../components/projects'
+import { Meta } from '../components/Meta'
 
-const Projects: React.FC<ProjectProps> = ({ data }) => {
+const Projects: React.FC<ProjectProps> = ({ data, seo }) => {
+  const { description, title, keywords, ogImage, ogTitle, ogType, ogUrl } = seo
+
   return (
     <>
-      <Head>
-        <title>Projects | Marow Macaulay</title>
-        <meta
-          name='description'
-          content="Explore a portfolio of Marow's visionary projects. Experience the transformative power of Marow's work."
-        />
-      </Head>
-      <main className='w-full mb-16 dark:my-0 flex flex-col justify-center items-center'>
+      <Meta
+        description={description}
+        title={title}
+        keywords={keywords}
+        ogImage={ogImage}
+        ogTitle={ogTitle}
+        ogType={ogType}
+        ogUrl={ogUrl}
+      />
+      <main className='w-full mb-16 dark:my-0 flex flex-col min-h-screen items-center'>
         <Layout className='pt-16 sm:px-12'>
           <AnimatedText
             text='Imagination Trumps Knowledge!'
@@ -46,11 +50,11 @@ const Projects: React.FC<ProjectProps> = ({ data }) => {
 export default Projects
 
 export async function getStaticProps() {
-  const data = await getProjects()
-
+  const { items, seo } = await getProjects()
   return {
     props: {
-      data,
+      data: items,
+      seo,
     },
     revalidate: 10,
   }

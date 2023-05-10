@@ -1,17 +1,24 @@
-import Head from 'next/head'
 import React from 'react'
 import Layout from '../components/Layout'
 import { formatSanityDate, getArticles } from '@/sanity/schemas/sanity-utils'
 import { ArticlesProps } from '@/types/Articles'
 import { Article, FeaturedArticles } from '@/components/articles'
 import { AnimatedText } from '@/components/common'
+import { Meta } from '../components/Meta'
 
-const articles: React.FC<ArticlesProps> = ({ articles }) => {
+const articles: React.FC<ArticlesProps> = ({ articles, seo }) => {
+  const { description, title, keywords, ogImage, ogTitle, ogType, ogUrl } = seo
   return (
     <>
-      <Head>
-        <title>Articles | Marow Macaulay</title>
-      </Head>
+      <Meta
+        description={description}
+        title={title}
+        keywords={keywords}
+        ogImage={ogImage}
+        ogTitle={ogTitle}
+        ogType={ogType}
+        ogUrl={ogUrl}
+      />
       <main className='w-full mb-16 dark:my-0 flex flex-col items-center min-h-screen overflow-hidden'>
         <Layout className='pt-16'>
           <AnimatedText
@@ -46,9 +53,9 @@ const articles: React.FC<ArticlesProps> = ({ articles }) => {
 }
 
 export async function getStaticProps() {
-  const articles = await getArticles()
+  const { items, seo } = await getArticles()
 
-  const transformedResponse = articles.map(({ _createdAt, ...article }) => ({
+  const transformedResponse = items.map(({ _createdAt, ...article }) => ({
     _createdAt: formatSanityDate(_createdAt),
     ...article,
   }))
@@ -56,6 +63,7 @@ export async function getStaticProps() {
   return {
     props: {
       articles: transformedResponse,
+      seo,
     },
     revalidate: 10,
   }

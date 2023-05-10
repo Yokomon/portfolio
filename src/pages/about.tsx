@@ -1,26 +1,29 @@
 import React from 'react'
-import Head from 'next/head'
 import { AnimatedText, FramerImage } from '@/components/common'
 import Layout from '../components/Layout'
 import { Skills, AnimatedNumbers } from '../components/about'
 import Experience from '../components/Experience'
-import { AboutProps } from '@/types/Component'
 import { getAboutData } from '@/sanity/schemas/sanity-utils'
 import { PortableText } from '@portabletext/react'
+import { Meta } from '../components/Meta'
+import { AboutProps } from '@/types/About'
 
 const about: React.FC<AboutProps> = ({ data, theme }) => {
-  const { lightImage, darkImage, biography, stats, experience } = data
+  const { lightImage, darkImage, biography, stats, experience, seo } = data
+  const { title, ogType, ogImage, description, keywords, ogTitle, ogUrl } = seo
   const defaultTheme = ['light', 'default'].includes(theme)
   return (
     <>
-      <Head>
-        <title>About | Marow Macaulay</title>
-        <meta
-          name='description'
-          content="Discover the artistic vision and creative journey of Marow Macaulay. Explore a captivating portfolio showcasing my skills in React/Next.js through Frontend development. Immerse yourself in a world of Frontend craft and artistry, where ⚛️ React and Tailwind blend seamlessly. Experience Marow's unique perspective and passion for technology. Welcome to an enchanting realm of Marow's portfolio."
-        />
-      </Head>
-      <main className='w-full flex flex-col items-center justify-center mb-16 dark:my-0'>
+      <Meta
+        description={description}
+        title={title}
+        keywords={keywords}
+        ogImage={ogImage}
+        ogTitle={ogTitle}
+        ogType={ogType}
+        ogUrl={ogUrl}
+      />
+      <main className='w-full flex flex-col items-center min-h-screen mb-16 dark:my-0'>
         <Layout>
           <AnimatedText
             text='Passion driven by creativity!'
@@ -53,12 +56,12 @@ const about: React.FC<AboutProps> = ({ data, theme }) => {
                 src={defaultTheme ? lightImage.url : darkImage.url}
                 alt='Marow Macaulay'
                 width={300}
-                height={100}
+                height={350}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
                 priority
                 placeholder='blur'
                 blurDataURL={defaultTheme ? lightImage.metadata.lqip : darkImage.metadata.lqip}
-                className='w-full h-full rounded-2xl border border-dark/25 dark:border-slate-600'
+                className='w-full h-auto rounded-2xl border border-dark/25 dark:border-slate-600'
               />
             </div>
             <div className='col-span-8 xl:col-span-2 flex flex-row xl:flex-col items-end justify-between my-4 dark:text-slate-400 order-3'>
