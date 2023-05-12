@@ -22,6 +22,7 @@ export const Meta: React.FC<MetaProps> = ({
       <meta name='author' content='Marow Macaulay' />
       <meta charSet='utf-8' />
       <link rel='icon' href='/favicon.ico' />
+      <meta name='google-site-verification' content='2-27SvaYcZGer5_mRoPvavWgHJKuytUQdvMCgSYhQSk' />
       <title>{title}</title>
     </Head>
   )
