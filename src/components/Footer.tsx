@@ -10,7 +10,7 @@ export const Footer = () => {
         <div className='text-sm md:text-base order-1 mb-5 sm:order-2 sm:mb-0'>
           Built with
           <span className=' text-primary dark:text-orange-500 text-2 xl px-1.5'>&#9825;</span>
-          by Marow
+          by Marow Macaulay
         </div>
       </Layout>
     </footer>
