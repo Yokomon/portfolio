@@ -1,4 +1,3 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import { getIndexData } from '@/sanity/schemas/sanity-utils'
 import Link from 'next/link'
@@ -13,6 +12,7 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
   const { summary, intro, darkImage, lightImage, resume, seo } = indexData
   const { title, ogType, ogImage, description, keywords, ogTitle, ogUrl } = seo
   const defaultTheme = ['light', 'default'].includes(theme)
+
   return (
     <>
       <Meta
