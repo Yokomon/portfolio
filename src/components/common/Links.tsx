@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 
 export const CustomLink: React.FC<CustomLinkProps> = ({ href, className, title }) => {
   const router = useRouter()
-
   return (
     <Link href={href} className={`${className} dark:text-slate-400 relative group`}>
       {title}
@@ -13,8 +12,8 @@ export const CustomLink: React.FC<CustomLinkProps> = ({ href, className, title }
         className={clsx({
           ['h-[1px] absolute inline-block bg-dark dark:bg-orange-500 dark:h-[2px] group-hover:w-full transition-[width] ease duration-300 -bottom-1 left-0']:
             true,
-          ['w-full']: router.asPath === href,
-          ['w-0']: router.asPath !== href,
+          ['w-full']: router.asPath.includes(title.toLowerCase()) || router.asPath === href,
+          ['w-0']: router.asPath.toLowerCase() !== title.toLowerCase(),
         })}
       >
         &nbsp;
@@ -42,10 +41,10 @@ export const CustomMobileLink: React.FC<CustomLinkProps> = ({ href, className, t
       {title}
       <span
         className={clsx({
-          ['h-[1px] absolute inline-block bg-dark dark:bg-orange-500 dark:h-[2px] group-hover:w-full transition-[width] ease duration-300 -bottom-1 left-0']:
+          ['h-[1px] absolute inline-block bg-slate-100 dark:bg-orange-500 dark:h-[2px] group-hover:w-full transition-[width] ease duration-300 -bottom-1 left-0']:
             true,
-          ['w-full']: router.asPath === href,
-          ['w-0']: router.asPath !== href,
+          ['w-full']: router.asPath.includes(title.toLowerCase()) || router.asPath === href,
+          ['w-0']: router.asPath.toLowerCase() !== title.toLowerCase(),
         })}
       >
         &nbsp;
