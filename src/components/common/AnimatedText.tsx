@@ -1,9 +1,11 @@
+import clsx from 'clsx'
 import { motion } from 'framer-motion'
 
 interface AnimatedTextProps {
   text: string
   className?: string
   textWrapper?: string
+  centered?: boolean
 }
 
 const quote = {
@@ -33,10 +35,14 @@ const singleWord = {
   },
 }
 
-const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = '', textWrapper }) => {
+const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = '', centered }) => {
   return (
     <div
-      className={`w-full mx-auto overflow-hidden flex justify-center items-center py-0 sm:py-2 ${textWrapper}`}
+      className={clsx({
+        ['w-full mx-auto overflow-hidden flex justify-center items-center py-0 sm:py-2']: true,
+        [className]: className,
+        ['text-center']: centered,
+      })}
     >
       <motion.h1
         variants={quote}

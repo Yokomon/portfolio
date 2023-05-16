@@ -27,8 +27,8 @@ const about: React.FC<AboutProps> = ({ data, theme }) => {
         <Layout>
           <AnimatedText
             text='Passion driven by creativity!'
-            textWrapper='text-center'
             className='text-4xl sm:text-5xl lg:text-7xl mt-8 mb-16'
+            centered
           />
           <div className='grid grid-cols-8 gap-8 lg:gap-16 w-full'>
             <div className='flex flex-col col-span-8 lg:col-span-4 xl:col-span-3 items-start justify-start dark:text-slate-400 order-2 lg:order-1'>
