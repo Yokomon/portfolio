@@ -1,40 +1,45 @@
 import React from 'react'
-import Layout from '../components/Layout'
+import Layout from '@/components/Layout'
 import { formatSanityDate, getArticles } from '@/sanity/schemas/sanity-utils'
 import { ArticlesProps } from '@/types/Articles'
 import { Article, FeaturedArticles } from '@/components/articles'
 import { AnimatedText } from '@/components/common'
-import { Meta } from '../components/Meta'
+import { Meta } from '@/components/Meta'
 
-const articles: React.FC<ArticlesProps> = ({ articles, seo }) => {
-  const { description, title, keywords, ogImage, ogTitle, ogType, ogUrl } = seo
+const ArticlePage: React.FC<ArticlesProps> = ({ articles }) => {
   return (
     <>
       <Meta
-        description={description}
-        title={title}
-        keywords={keywords}
-        ogImage={ogImage}
-        ogTitle={ogTitle}
-        ogType={ogType}
-        ogUrl={ogUrl}
+        description={
+          'Explore a collection of informative articles on various topics. Stay updated with the latest insights, trends, and tips shared by Marow Macaulay'
+        }
+        title={'Articles - Marow Macaulay'}
+        keywords={
+          'marow, macaulay, marow macaulay, articles, blog, insights, trends, tips, information, knowledge'
+        }
+        ogImage={'/articles-img.jpeg'}
+        ogTitle={'Articles - Marow Macaulay'}
+        ogType={'website'}
+        ogUrl={'https://marowmacaulay.me/articles'}
       />
       <main className='w-full mb-16 dark:my-0 flex flex-col items-center min-h-screen overflow-hidden'>
         <Layout className='pt-16'>
           <AnimatedText
             text='Words are medicine to the soul!'
             className='text-[44px] sm:text-5xl lg:text-7xl mb-16'
-            textWrapper='text-center'
+            centered
           />
           <ul className='grid grid-cols-2 gap-16'>
-            {articles.map(({ name, url, summary, image, duration }, idx) => (
+            {articles.map(({ name, url, summary, image, external, duration, slug }, idx) => (
               <FeaturedArticles
+                slug={slug}
                 link={url}
                 title={name}
                 imgSrc={image}
                 summary={summary}
                 duration={duration}
                 key={idx}
+                external={external}
               />
             ))}
           </ul>
@@ -42,8 +47,8 @@ const articles: React.FC<ArticlesProps> = ({ articles, seo }) => {
             All articles
           </h2>
           <ul>
-            {articles.map(({ name, updatedAt, url }, idx) => (
-              <Article key={idx} title={name} date={updatedAt} link={url} />
+            {articles.map(({ name, _createdAt, url }, idx) => (
+              <Article key={idx} title={name} date={_createdAt} link={url} />
             ))}
           </ul>
         </Layout>
@@ -53,20 +58,18 @@ const articles: React.FC<ArticlesProps> = ({ articles, seo }) => {
 }
 
 export async function getStaticProps() {
-  const { items, seo } = await getArticles()
-
-  const transformedResponse = items.map(({ updatedAt, ...article }) => ({
-    updatedAt: formatSanityDate(updatedAt),
+  const data = await getArticles()
+  const transformedResponse = data.map(({ _createdAt, ...article }) => ({
+    _createdAt: formatSanityDate(_createdAt),
     ...article,
   }))
 
   return {
     props: {
       articles: transformedResponse,
-      seo,
     },
     revalidate: 10,
   }
 }
 
-export default articles
+export default ArticlePage

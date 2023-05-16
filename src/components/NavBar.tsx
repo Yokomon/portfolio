@@ -30,7 +30,10 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
     setIsOpen(!isOpen)
   }
 
-  const handleDarkMode = () => setMode(defaultTheme ? Theme.dark : Theme.light)
+  const handleDarkMode = () => {
+    if (isOpen) setIsOpen(!isOpen)
+    setMode(defaultTheme ? Theme.dark : Theme.light)
+  }
 
   return (
     <header className='w-full px-5 sm:px-12 lg:px-32 py-8 font-medium flex items-center justify-between dark:bg-slate-900 relative'>

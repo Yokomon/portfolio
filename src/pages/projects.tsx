@@ -23,7 +23,7 @@ const Projects: React.FC<ProjectProps> = ({ data, seo }) => {
         <Layout className='pt-16 sm:px-12'>
           <AnimatedText
             text='Imagination Trumps Knowledge!'
-            textWrapper='text-center'
+            centered
             className='text-[44px] sm:text-5xl mb-8 lg:text-7xl sm:mb-16'
           />
 

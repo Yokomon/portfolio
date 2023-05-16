@@ -1,11 +1,11 @@
-import { ImageMetadata } from 'sanity'
+import { ImageMetadata, PortableTextBlock, Slug } from 'sanity'
 import { MetaProps } from './Meta'
 
-export type ArticleItems = {
+export interface ArticleItems extends MetaProps {
   _id: string
-  updatedAt: Date
+  _createdAt: Date
   name: string
-  slug: string
+  slug: Slug
   image: {
     url: string
     metadata: ImageMetadata
@@ -13,11 +13,8 @@ export type ArticleItems = {
   url: string
   summary: string
   duration: string
-}
-
-export interface Article {
-  seo: MetaProps
-  items: ArticleItems[]
+  external: boolean
+  body: PortableTextBlock
 }
 
 interface ArticlesProps {
@@ -34,6 +31,8 @@ interface FeaturedArticlesInterface {
   title: string
   duration: string
   summary: string
+  slug: Slug
+  external: boolean
 }
 
 interface ArticleComponent {
