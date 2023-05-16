@@ -1,5 +1,5 @@
 import { AboutData } from '@/types/About'
-import { Article } from '@/types/Articles'
+import { ArticleItems } from '@/types/Articles'
 import { IndexData } from '@/types/Component'
 import { Project } from '@/types/Project'
 import { groq } from 'next-sanity'
@@ -26,36 +26,46 @@ export async function getProjects(): Promise<Project> {
   )
 }
 
-export async function getProject(slug: string): Promise<Project> {
+export async function getArticles(): Promise<ArticleItems[]> {
   return clientConfig.fetch(
-    groq`*[_type == "project" && slug.current == $slug][0]{
-        _id,
-        _createdAt,
-        name,
-        "slug": slug.current,
-        url,
-        summary,
-        "image": image.asset -> url
-    }`,
-    { slug },
-  )
-}
-
-export async function getArticles(): Promise<Article> {
-  return clientConfig.fetch(
-    groq`*[_type == 'articles'][0]{
-      seo{
-        ...,
-        "ogImage": ogImage.asset -> url 
-      },
-      items[]{
-        ...,
+    groq`*[_type == 'articles']{
+      _id, 
+      _createdAt,
+      ogTitle,
+      ogType,
+      ogUrl,
+      'ogImage': ogImage.asset -> url,
+      description,
+      title,
       "image": image.asset -> {
         url,
         metadata
       },
-      }
+      url,
+      slug,
+      name,
+      summary,
+      duration,
+      external
     }`,
+  )
+}
+
+export async function getArticle(slug: string): Promise<ArticleItems[]> {
+  return clientConfig.fetch(
+    groq`*[_type == 'articles' && slug.current == $slug][0]{
+     ...,
+     'image' : image.asset -> url,
+     body[]{
+      ...,
+      _type == 'image' => {
+        ...,
+        asset ->,
+        metadata
+      }
+     }
+    }`,
+    { slug },
   )
 }
 
