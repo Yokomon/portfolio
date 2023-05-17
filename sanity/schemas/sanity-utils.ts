@@ -63,7 +63,8 @@ export async function getArticle(slug: string): Promise<ArticleItems[]> {
         asset ->,
         metadata
       }
-     }
+     },
+     'ogImage': ogImage.asset -> url
     }`,
     { slug },
   )
