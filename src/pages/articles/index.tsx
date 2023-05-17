@@ -47,8 +47,8 @@ const ArticlePage: React.FC<ArticlesProps> = ({ articles }) => {
             All articles
           </h2>
           <ul>
-            {articles.map(({ name, _createdAt, url }, idx) => (
-              <Article key={idx} title={name} date={_createdAt} link={url} />
+            {articles.map(({ name, _createdAt, slug }, idx) => (
+              <Article key={idx} title={name} date={_createdAt} link={slug.current} />
             ))}
           </ul>
         </Layout>

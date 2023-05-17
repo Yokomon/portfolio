@@ -71,7 +71,20 @@ const Slug = ({ data }: ArticleSlug) => {
                   </div>
                 ),
                 code: ({ value }) => (
-                  <SyntaxHighlighter style={oneDark} language='javascript'>
+                  <SyntaxHighlighter
+                    customStyle={{
+                      lineHeight: '1.6',
+                      fontSize: '12px',
+                    }}
+                    codeTagProps={{
+                      style: {
+                        lineHeight: 'inherit',
+                        fontSize: 'inherit',
+                      },
+                    }}
+                    style={oneDark}
+                    language='javascript'
+                  >
                     {value.code}
                   </SyntaxHighlighter>
                 ),
