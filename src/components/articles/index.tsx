@@ -16,7 +16,7 @@ const Article: React.FC<ArticleComponent> = ({ title, date, link }) => {
       viewport={{ once: true }}
       className='relative w-full items-center flex flex-wrap rounded-xl border-r-4 border-b-4 p-3 my-5 justify-between bg-light text-dark first:mt-0 border border-solid border-dark dark:bg-slate-900 dark:border-slate-300'
     >
-      <Link href={link ?? ''} target='_blank'>
+      <Link href={`articles/${link}`}>
         <h2 className='font-medium text-base mr-4 hover:underline hover:duration-500 dark:text-slate-400'>
           {title}
         </h2>
