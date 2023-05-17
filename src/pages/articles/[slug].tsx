@@ -86,7 +86,7 @@ const Slug = ({ data }: ArticleSlug) => {
                 bullet: ({ children }) => (
                   <li
                     style={{ listStyleType: 'disclosure-closed' }}
-                    className='pb-3 text-slate-400'
+                    className='pb-3 dark:text-slate-400'
                   >
                     {children}
                   </li>
