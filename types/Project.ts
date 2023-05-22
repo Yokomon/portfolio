@@ -1,27 +1,12 @@
 import { ImageMetadata, PortableTextBlock } from 'sanity'
 import { MetaProps } from './Meta'
 
-export type ProjectItems = {
-  _id: string
-  _createdAt: Date
-  name: string
-  slug: string
-  image: {
-    url: string
-    metadata: ImageMetadata
-  }
-  url: string
-  summary: PortableTextBlock[]
-  githubUrl: string
-  featured: boolean
-}
-
-export interface Project {
+export interface ProjectQuery {
   seo: MetaProps
   items: ProjectItems[]
 }
 
-export interface FeaturedProjectProps {
+export interface ProjectComponents {
   url: string
   featured: boolean
   name: string
@@ -31,9 +16,15 @@ export interface FeaturedProjectProps {
     metadata: ImageMetadata
   }
   githubUrl: string
+  tools: string[]
+}
+
+export interface ProjectItems extends ProjectComponents {
+  _id: string
+  _createdAt: Date
 }
 
 export interface ProjectProps {
-  data: FeaturedProjectProps[]
+  data: ProjectComponents[]
   seo: MetaProps
 }

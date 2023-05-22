@@ -1,14 +1,14 @@
 import { AboutData } from '@/types/About'
 import { ArticleItems } from '@/types/Articles'
 import { IndexData } from '@/types/Component'
-import { Project } from '@/types/Project'
+import { ProjectQuery } from '@/types/Project'
 import { groq } from 'next-sanity'
 import { clientConfig } from '../config/client-config'
 
 export const formatSanityDate = (date: Date) =>
   new Date(date).toLocaleDateString('en-NG').replaceAll('/', '-')
 
-export async function getProjects(): Promise<Project> {
+export async function getProjects(): Promise<ProjectQuery> {
   return clientConfig.fetch(
     groq`*[_type == "project"][0]{
       seo{

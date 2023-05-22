@@ -1,10 +1,12 @@
-import { FeaturedProjectProps } from '@/types/Project'
+import React from 'react'
+import { ProjectComponents } from '@/types/Project'
 import { PortableText } from '@portabletext/react'
 import Link from 'next/link'
 import { AiFillGithub } from 'react-icons/ai'
 import { FramerImage } from '../common'
+import { getProjectIcons } from '@/lib/getProjectIcons'
 
-const Project: React.FC<FeaturedProjectProps> = ({ url, name, image, featured, githubUrl }) => (
+const Project: React.FC<ProjectComponents> = ({ url, name, image, featured, githubUrl }) => (
   <article className='w-full flex flex-col relative justify-between rounded-3xl border border-solid border-dark bg-light dark:bg-slate-900 dark:border-slate-300 shadow-2xl p-4 sm:p-8'>
     <div className='absolute top-1 sm:top-0 -right-1.5 sm:-right-3 -z-10 w-[101%] h-[102%] sm:h-[103%] rounded-[2rem] bg-dark dark:bg-slate-300' />
     <Link href={url} target='_blank' className='cursor-pointer overflow-hidden rounded-lg'>
@@ -41,13 +43,14 @@ const Project: React.FC<FeaturedProjectProps> = ({ url, name, image, featured, g
   </article>
 )
 
-const FeaturedProject: React.FC<FeaturedProjectProps> = ({
+const FeaturedProject: React.FC<ProjectComponents> = ({
   url,
   featured,
   name,
   summary,
   image,
   githubUrl,
+  tools,
 }) => {
   return (
     <article className='w-full flex flex-col sm:flex-row items-center justify-between relative rounded-2xl sm:rounded-3xl border border-solid border-dark bg-light dark:bg-slate-900 dark:border-slate-300 shadow-2xl p-4 sm:p-8'>
@@ -88,13 +91,23 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = ({
           components={{
             block: {
               normal: ({ children }) => (
-                <p className='my-2 font-medium text-base text-dark dark:text-slate-400'>
+                <p className='my-2 font-medium text-sm sm:text-base text-dark dark:text-slate-400'>
                   {children}
                 </p>
               ),
             },
           }}
         />
+        <div className='flex items-center flex-wrap my-3 space-x-5'>
+          <span className='dark:text-slate-400 text-sm'>Tools used:</span>
+          {tools.map((tool, idx) =>
+            React.createElement(getProjectIcons[tool].icon, {
+              size: 24,
+              className: getProjectIcons[tool].iconClass,
+              key: idx,
+            }),
+          )}
+        </div>
         <div className='mt-2 flex items-center'>
           <Link href={githubUrl} target='_blank'>
             <AiFillGithub size={28} className='dark:fill-light' />
