@@ -28,7 +28,7 @@ const Projects: React.FC<ProjectProps> = ({ data, seo }) => {
           />
 
           <div className='grid grid-cols-12 gap-x-0 gap-y-24 sm:gap-x-8 md:gap-x-12 sm:gap-y-32 md:gap-24 md:gap-y-32 my-12 sm:my-0 dark:mb-12'>
-            {data.map(({ url, name, image, featured, githubUrl, summary }, idx) => (
+            {data.map(({ url, name, image, featured, githubUrl, summary, tools }, idx) => (
               <div key={idx} className='col-span-12'>
                 <FeaturedProject
                   url={url}
@@ -37,6 +37,7 @@ const Projects: React.FC<ProjectProps> = ({ data, seo }) => {
                   image={image}
                   githubUrl={githubUrl}
                   summary={summary}
+                  tools={tools}
                 />
               </div>
             ))}
