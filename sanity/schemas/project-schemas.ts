@@ -97,6 +97,12 @@ const project = defineType({
               type: 'array',
               of: [{ type: 'block' }],
             },
+            {
+              name: 'tools',
+              title: 'Tools',
+              type: 'array',
+              of: [{ type: 'string' }],
+            },
           ],
         },
       ],
