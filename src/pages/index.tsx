@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion'
 import { getIndexData } from '@/sanity/schemas/sanity-utils'
 import Link from 'next/link'
-import Layout from '../components/Layout'
-import { AnimatedText, FramerImage } from '@/components/common'
+import Layout from '@/components/Layout'
+import { AnimatedText } from '@/components/common'
 import { GiLightBulb } from 'react-icons/gi'
 import { ComponentProps } from '@/types/Component'
 import { BsDownload } from 'react-icons/bs'
-import { Meta } from '../components/Meta'
+import { Meta } from '@/components/Meta'
+import ThemedImage from '@/components/common/ThemedImage'
 
-const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
+const Home: React.FC<ComponentProps> = ({ indexData }) => {
   const { summary, intro, darkImage, lightImage, resume, seo } = indexData
   const { title, ogType, ogImage, description, keywords, ogTitle, ogUrl } = seo
-  const defaultTheme = ['light', 'default'].includes(theme)
 
   return (
     <>
@@ -28,7 +28,7 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
         <Layout>
           <div className='flex justify-between items-center w-full flex-col md:flex-row'>
             <div className='w-full lg:w-1/2 md:hidden lg:block'>
-              <FramerImage
+              <ThemedImage
                 initial={{
                   opacity: 0,
                 }}
@@ -39,11 +39,11 @@ const Home: React.FC<ComponentProps> = ({ indexData, theme }) => {
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
                 width={420}
                 height={600}
-                src={defaultTheme ? lightImage.url : darkImage.url}
+                lightImage={lightImage}
+                darkImage={darkImage}
                 alt={'Profile pic'}
                 className='w-full h-auto my-12'
                 placeholder='blur'
-                blurDataURL={defaultTheme ? lightImage.metadata.lqip : darkImage.metadata.lqip}
                 priority
               />
             </div>

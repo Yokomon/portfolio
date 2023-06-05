@@ -1,17 +1,20 @@
 import React from 'react'
-import { AnimatedText, FramerImage } from '@/components/common'
-import Layout from '../components/Layout'
-import { Skills, AnimatedNumbers } from '../components/about'
-import Experience from '../components/Experience'
-import { getAboutData } from '@/sanity/schemas/sanity-utils'
 import { PortableText } from '@portabletext/react'
-import { Meta } from '../components/Meta'
-import { AboutProps } from '@/types/About'
 
-const about: React.FC<AboutProps> = ({ data, theme }) => {
+import { AboutProps } from '@/types/About'
+import { getAboutData } from '@/sanity/schemas/sanity-utils'
+import { AnimatedText } from '@/components/common'
+
+import Layout from '@/components/Layout'
+import { Skills, AnimatedNumbers } from '@/components/about'
+import Experience from '@/components/Experience'
+import { Meta } from '@/components/Meta'
+import ThemedImage from '@/components/common/ThemedImage'
+
+const about: React.FC<AboutProps> = ({ data }) => {
   const { lightImage, darkImage, biography, stats, experience, seo } = data
   const { title, ogType, ogImage, description, keywords, ogTitle, ogUrl } = seo
-  const defaultTheme = ['light', 'default'].includes(theme)
+
   return (
     <>
       <Meta
@@ -45,7 +48,7 @@ const about: React.FC<AboutProps> = ({ data, theme }) => {
               />
             </div>
             <div className='col-span-8 lg:col-span-4 xl:col-span-3 relative h-max border-2 rounded-2xl border-solid border-dark dark:border-slate-300 p-8 order-1 lg:order-2'>
-              <FramerImage
+              <ThemedImage
                 initial={{
                   opacity: 0,
                 }}
@@ -53,14 +56,14 @@ const about: React.FC<AboutProps> = ({ data, theme }) => {
                   opacity: 1,
                   transition: { duration: 1.5 },
                 }}
-                src={defaultTheme ? lightImage.url : darkImage.url}
+                lightImage={lightImage}
+                darkImage={darkImage}
                 alt='Marow Macaulay'
                 width={300}
                 height={350}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
                 priority
                 placeholder='blur'
-                blurDataURL={defaultTheme ? lightImage.metadata.lqip : darkImage.metadata.lqip}
                 className='w-full h-auto rounded-2xl border border-dark/25 dark:border-slate-600'
               />
             </div>

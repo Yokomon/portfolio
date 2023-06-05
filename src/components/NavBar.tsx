@@ -1,21 +1,25 @@
-import React, { SetStateAction, useEffect, useState } from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
-import { Logo } from './Logo'
-import { mobileSocialLinks, socalLinks } from './Links'
 import { HiLightBulb } from 'react-icons/hi'
 import { BsMoonStars } from 'react-icons/bs'
-import { motion } from 'framer-motion'
-import { Theme } from './hooks/useThemeSwitcher'
+
+import { Logo } from './Logo'
+import { mobileSocialLinks, socalLinks } from './Links'
+
 import { CustomLink, CustomMobileLink } from './common/Links'
 
-interface NavBarProps {
-  mode: Theme
-  setMode: React.Dispatch<SetStateAction<Theme>>
-}
-
-const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
+const NavBar = () => {
+  const [mounted, setMounted] = useState(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const defaultTheme = [Theme.light, Theme.default].includes(mode)
+  const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     // Prevent scrolling when navbar is active
@@ -26,13 +30,21 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
     }
   }, [isOpen])
 
+  if (!mounted) {
+    return null
+  }
+
   const handleMenu = () => {
     setIsOpen(!isOpen)
   }
 
   const handleDarkMode = () => {
     if (isOpen) setIsOpen(!isOpen)
-    setMode(defaultTheme ? Theme.dark : Theme.light)
+    if (theme === 'dark') {
+      setTheme('light')
+      return
+    }
+    setTheme('dark')
   }
 
   return (
@@ -82,7 +94,7 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
           ))}
 
           <button className='mx-8' aria-label='theme' onClick={handleDarkMode}>
-            {mode === 'dark' ? (
+            {theme === 'dark' ? (
               <HiLightBulb
                 size={30}
                 className='dark:fill-yellow-400 hover:scale-105 duration-300'
@@ -122,7 +134,7 @@ const NavBar: React.FC<NavBarProps> = ({ mode, setMode }) => {
             ))}
 
             <button className='mx-8 my-4' type='button' aria-label='theme' onClick={handleDarkMode}>
-              {mode === 'dark' ? (
+              {theme === 'dark' ? (
                 <HiLightBulb
                   size={30}
                   className='dark:fill-yellow-400 hover:scale-105 duration-300'

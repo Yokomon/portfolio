@@ -3,7 +3,6 @@ import { MetaProps } from './Meta'
 
 export interface ComponentProps {
   indexData: IndexData
-  theme: string
 }
 
 export interface IndexData {
