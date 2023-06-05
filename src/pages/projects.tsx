@@ -2,8 +2,8 @@ import { AnimatedText } from '@/components/common'
 import Layout from '@/components/Layout'
 import { getProjects } from '@/sanity/schemas/sanity-utils'
 import { ProjectProps } from '@/types/Project'
-import { FeaturedProject } from '../components/projects'
-import { Meta } from '../components/Meta'
+import { FeaturedProject } from '@/components/projects'
+import { Meta } from '@/components/Meta'
 
 const Projects: React.FC<ProjectProps> = ({ data, seo }) => {
   const { description, title, keywords, ogImage, ogTitle, ogType, ogUrl } = seo
