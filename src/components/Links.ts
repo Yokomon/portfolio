@@ -21,7 +21,7 @@ const socalLinks: SocialLinks[] = [
     name: 'github',
   },
   {
-    href: 'http://linkedin.com/in/marow-macaulay-68606b193',
+    href: 'http://linkedin.com/in/marowmacaulay',
     icon: AiFillLinkedin,
     fill: '#0072b1',
     className,
