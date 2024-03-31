@@ -23,7 +23,7 @@ const Project: React.FC<ProjectComponents> = ({ url, name, image, featured, gith
     <div className='flex flex-col justify-between'>
       <span className='text-primary dark:text-orange-500 font-medium text-xl mt-5'>{featured}</span>
       <Link href={url} target='_blank' className='hover:underline hover:underline-offset-2'>
-        <h2 className='text-lg md:text-3xl lg:text-4xl font-bold w-full text-left my-2 dark:text-slate-400'>
+        <h2 className='text-lg md:text-3xl lg:text-4xl font-bold w-full text-left my-2 dark:text-white'>
           {name}
         </h2>
       </Link>
@@ -53,18 +53,17 @@ const FeaturedProject: React.FC<ProjectComponents> = ({
   tools,
 }) => {
   return (
-    <article className='w-full flex flex-col sm:flex-row items-center justify-between relative rounded-2xl sm:rounded-3xl border border-solid border-dark bg-light dark:bg-slate-900 dark:border-slate-300 shadow-2xl p-4 sm:p-8'>
-      <div className='absolute top-0 -right-1.5 sm:-right-3 -z-10 w-[101%] h-[101%] sm:h-[103%] rounded-[2rem] bg-dark dark:bg-slate-300' />
-
+    <article className='w-full group flex flex-col relative rounded-2xl sm:rounded-3xl border border-solid border-dark bg-light dark:bg-slate-900 dark:border-orange-400 shadow-lg p-4 sm:p-6'>
+      <div className='-z-10 absolute top-0 left-0 w-full group-hover:translate-x-1 group-hover:translate-y-1 h-full duration-500 rounded-[2rem] bg-dark dark:bg-gradient-to-t dark:from-orange-500 dark:to-[50%] dark:to-slate-900' />
       <Link
         href={url}
         target='_blank'
-        className='cursor-pointer overflow-hidden rounded-lg w-full border border-dark dark:border-0 sm:w-1/2'
+        className='cursor-pointer overflow-hidden rounded-lg w-full border border-dark dark:border-0'
       >
         <FramerImage
           src={image.url}
           alt={name}
-          className='w-full h-full'
+          className='w-full h-auto md:h-72 object-cover object-top'
           whileHover={{ scale: 1.05 }}
           sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
           priority
@@ -75,14 +74,14 @@ const FeaturedProject: React.FC<ProjectComponents> = ({
           blurDataURL={image.metadata.lqip}
         />
       </Link>
-      <div className='w-full sm:w-1/2 flex flex-col items-start justify-between px-0 sm:pl-6'>
+      <div className='w-full flex flex-col items-start justify-between'>
         {featured && (
           <span className='text-primary dark:text-orange-500 font-medium text-xl mt-5'>
             Featured Project
           </span>
         )}
-        <Link href={url} target='_blank' className='hover:underline hover:underline-offset-2'>
-          <h2 className='text-xl md:text-3xl lg:text-4xl font-bold w-full text-left my-2 dark:text-slate-400'>
+        <Link href={url} target='_blank' className='hover:underline underline-offset-4'>
+          <h2 className='text-xl md:text-3xl font-bold w-full text-left my-2 dark:text-white'>
             {name}
           </h2>
         </Link>
@@ -91,15 +90,13 @@ const FeaturedProject: React.FC<ProjectComponents> = ({
           components={{
             block: {
               normal: ({ children }) => (
-                <p className='my-2 font-medium text-sm sm:text-base text-dark dark:text-slate-400'>
-                  {children}
-                </p>
+                <p className='my-2 font-medium text-sm text-dark dark:text-white'>{children}</p>
               ),
             },
           }}
         />
         <div className='flex items-center flex-wrap my-3 space-x-5'>
-          <span className='dark:text-slate-400 text-sm'>Tools used:</span>
+          <span className='dark:text-white text-sm'>Tools used:</span>
           {tools.map((tool, idx) =>
             React.createElement(getProjectIcons[tool].icon, {
               size: 24,

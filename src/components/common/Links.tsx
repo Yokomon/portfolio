@@ -5,15 +5,24 @@ import { useRouter } from 'next/router'
 
 export const CustomLink: React.FC<CustomLinkProps> = ({ href, className, title }) => {
   const router = useRouter()
+  const isActive = router.asPath.includes(title.toLowerCase()) || router.asPath === href
   return (
-    <Link href={href} className={`${className} dark:text-slate-400 relative group`}>
+    <Link
+      href={href}
+      className={clsx({
+        ['relative group dark:hover:text-orange-500/95']: true,
+        [`${className}`]: className,
+        ['dark:text-orange-500/95']: isActive,
+        ['dark:text-white']: !isActive,
+      })}
+    >
       {title}
       <span
         className={clsx({
-          ['h-[1px] absolute inline-block bg-dark dark:bg-orange-500 dark:h-[2px] group-hover:w-full transition-[width] ease duration-300 -bottom-1 left-0']:
+          ['h-[1px] top-6 absolute inline-block bg-dark dark:bg-orange-500 dark:h-[2px] group-hover:w-full transition-[width] ease duration-300 -bottom-1 left-0']:
             true,
-          ['w-full']: router.asPath.includes(title.toLowerCase()) || router.asPath === href,
-          ['w-0']: router.asPath.toLowerCase() !== title.toLowerCase(),
+          ['w-full']: isActive,
+          ['w-0']: !isActive,
         })}
       >
         &nbsp;
