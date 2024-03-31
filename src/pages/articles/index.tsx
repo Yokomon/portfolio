@@ -32,7 +32,7 @@ const ArticlePage: React.FC<ArticlesProps> = ({ articles }) => {
             className='text-4xl mt-8 sm:text-5xl lg:text-7xl z-50 mb-16'
             centered
           />
-          <ul className='grid grid-cols-2 gap-16'>
+          <ul className='grid md:grid-cols-2 gap-16'>
             {articles.map(({ name, url, summary, image, external, duration, slug }, idx) => (
               <FeaturedArticles
                 slug={slug}
