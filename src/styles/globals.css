@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply selection:bg-orange-500/95 selection:text-white;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  animation-name: slide;
+  animation-delay: 0;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+::-webkit-scrollbar-track {
+  background: inherit;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 4.5px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-orange-500 rounded-full;
+}
