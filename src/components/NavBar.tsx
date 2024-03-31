@@ -48,7 +48,7 @@ const NavBar = () => {
   }
 
   return (
-    <header className='w-full px-5 sm:px-12 lg:px-32 py-8 font-medium flex items-center justify-between dark:bg-slate-900 relative'>
+    <header className='w-full py-8 px-8 sm:px-12 lg:px-32 xl:px-12 xl:container xl:mx-auto font-medium flex items-center justify-between relative'>
       <button
         aria-label='nav'
         className='flex-col justify-center items-center duration-300 flex lg:hidden'
@@ -132,17 +132,6 @@ const NavBar = () => {
                 {React.createElement(icon, { size: 35, className, fill })}
               </Link>
             ))}
-
-            <button className='mx-8 my-4' type='button' aria-label='theme' onClick={handleDarkMode}>
-              {theme === 'dark' ? (
-                <HiLightBulb
-                  size={30}
-                  className='dark:fill-yellow-400 hover:scale-105 duration-300'
-                />
-              ) : (
-                <BsMoonStars size={26} className='fill-light hover:scale-105 duration-300' />
-              )}
-            </button>
           </nav>
         </motion.div>
       )}
@@ -150,6 +139,14 @@ const NavBar = () => {
       <div className='absolute left-[50%] top-2 translate-x-[-50%]'>
         <Logo />
       </div>
+
+      <button className='lg:hidden' type='button' aria-label='theme' onClick={handleDarkMode}>
+        {theme === 'dark' ? (
+          <HiLightBulb size={35} className='dark:fill-yellow-300 hover:scale-105 duration-300' />
+        ) : (
+          <BsMoonStars size={30} className='fill-dark hover:scale-105 duration-300' />
+        )}
+      </button>
     </header>
   )
 }
