@@ -1,17 +1,34 @@
-import { motion } from 'framer-motion'
-import { getIndexData } from '@/sanity/schemas/sanity-utils'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
+import { useTheme } from 'next-themes'
+import { GiLightBulb } from 'react-icons/gi'
+import { BsDownload } from 'react-icons/bs'
+
+import { getIndexData } from '@/sanity/schemas/sanity-utils'
 import Layout from '@/components/Layout'
 import { AnimatedText } from '@/components/common'
-import { GiLightBulb } from 'react-icons/gi'
 import { ComponentProps } from '@/types/Component'
-import { BsDownload } from 'react-icons/bs'
 import { Meta } from '@/components/Meta'
-import ThemedImage from '@/components/common/ThemedImage'
 
 const Home: React.FC<ComponentProps> = ({ indexData }) => {
+  const AnimatedImage = motion(Image)
   const { summary, intro, darkImage, lightImage, resume, seo } = indexData
   const { title, ogType, ogImage, description, keywords, ogTitle, ogUrl } = seo
+
+  const { theme } = useTheme()
+
+  const [currentTheme, setCurrentTheme] = useState('')
+
+  useEffect(() => {
+    // Prevent hydration errors
+    if (theme) {
+      setCurrentTheme(theme)
+    }
+  }, [theme])
+
+  if (!currentTheme) return <div className='min-h-screen' />
 
   return (
     <>
@@ -28,24 +45,49 @@ const Home: React.FC<ComponentProps> = ({ indexData }) => {
         <Layout>
           <div className='flex justify-between items-center w-full flex-col md:flex-row'>
             <div className='w-full lg:w-1/2 md:hidden lg:block'>
-              <ThemedImage
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 1.5 },
-                }}
-                sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
-                width={420}
-                height={600}
-                lightImage={lightImage}
-                darkImage={darkImage}
-                alt={'Profile pic'}
-                className='w-full h-auto my-12'
-                placeholder='blur'
-                priority
-              />
+              <AnimatePresence>
+                {currentTheme === 'light' ? (
+                  <AnimatedImage
+                    initial={{ opacity: 0.5 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { duration: 0.3 },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      transition: { duration: 0.3 },
+                    }}
+                    sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
+                    width={420}
+                    height={600}
+                    alt='Profile image'
+                    src={lightImage.url}
+                    blurDataURL={lightImage.metadata.lqip}
+                    className='w-full h-auto my-12'
+                    priority
+                  />
+                ) : (
+                  <AnimatedImage
+                    initial={{ opacity: 0.5 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { duration: 0.3 },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      transition: { duration: 0.3 },
+                    }}
+                    sizes='(max-width: 768px) 100vw, (max-width: 1200px): 50vw, 50vw'
+                    width={420}
+                    height={600}
+                    alt='Profile image'
+                    src={darkImage.url}
+                    className='w-full h-auto my-12'
+                    blurDataURL={darkImage.metadata.lqip}
+                    priority
+                  />
+                )}
+              </AnimatePresence>
             </div>
             <div className='w-full lg:w-1/2 lg:p-8 md:mt-32 lg:mt-0 relative'>
               <AnimatedText
@@ -62,13 +104,13 @@ const Home: React.FC<ComponentProps> = ({ indexData }) => {
                   x: 0,
                   transition: { duration: 1 },
                 }}
-                className='font-medium leading-[1.7] sm:leading-normal dark:text-slate-400 text-sm sm:text-base lg:text-sm xl:text-base text-center sm:text-left my-8 sm:my-0'
+                className='font-medium leading-[1.7] sm:leading-normal dark:text-white text-sm sm:text-base lg:text-sm xl:text-base text-center sm:text-left my-8 sm:my-0'
               >
                 {summary}
               </motion.p>
               <div className='flex items-center self-start justify-center sm:justify-start my-4'>
                 <Link
-                  className='bg-dark border border-dark dark:border-orange-500/80 dark:text-slate-400 dark:bg-slate-900 font-semibold px-6 duration-500 hover:bg-light text-light hover:text-dark p-2 md:p-3 text-sm md:text-base rounded-lg flex items-center'
+                  className='bg-dark border border-dark dark:border-orange-500/80 dark:text-white dark:bg-slate-900 font-semibold px-6 duration-500 hover:bg-light text-light hover:text-dark p-2 md:p-3 text-sm md:text-base rounded-lg flex items-center'
                   href={resume}
                   download={true}
                   target='_blank'
@@ -77,7 +119,7 @@ const Home: React.FC<ComponentProps> = ({ indexData }) => {
                   <BsDownload size={24} className='hidden sm:block ml-5 dark:text-orange-600' />
                 </Link>
                 <Link
-                  className='font-medium underline px-6 text-dark dark:text-slate-400 text-sm sm:text-base underline-offset-8 ml-6 p-3'
+                  className='font-medium underline px-6 text-dark dark:text-white text-sm sm:text-base underline-offset-8 ml-6 p-3'
                   href='mailto:marowmacaulay@gmail.com'
                   target='_blank'
                 >

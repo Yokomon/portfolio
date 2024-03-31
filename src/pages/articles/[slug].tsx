@@ -32,15 +32,13 @@ const Slug = ({ data }: ArticleSlug) => {
             components={{
               block: {
                 normal: ({ children }) => (
-                  <p className='font-normal my-8 mx-auto dark:text-slate-400 text-base'>
-                    {children}
-                  </p>
+                  <p className='font-normal my-8 mx-auto dark:text-white text-base'>{children}</p>
                 ),
                 h1: ({ children }) => (
-                  <h1 className='text-3xl font-bold dark:text-slate-400'>{children}</h1>
+                  <h1 className='text-3xl font-bold dark:text-white'>{children}</h1>
                 ),
                 h6: ({ children }) => (
-                  <h6 className='text-sm font-semibold text-gray-400 text-center dark:text-slate-400'>
+                  <h6 className='text-sm font-semibold text-gray-400 text-center dark:text-white'>
                     {children}
                   </h6>
                 ),
@@ -99,12 +97,12 @@ const Slug = ({ data }: ArticleSlug) => {
                 bullet: ({ children }) => (
                   <li
                     style={{ listStyleType: 'disclosure-closed' }}
-                    className='pb-3 dark:text-slate-400'
+                    className='pb-3 dark:text-white'
                   >
                     {children}
                   </li>
                 ),
-                number: ({ children }) => <li className='pb-3 dark:text-slate-400'>{children}</li>,
+                number: ({ children }) => <li className='pb-3 dark:text-white'>{children}</li>,
               },
             }}
           />

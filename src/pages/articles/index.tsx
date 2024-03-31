@@ -1,10 +1,12 @@
 import React from 'react'
+
 import Layout from '@/components/Layout'
 import { formatSanityDate, getArticles } from '@/sanity/schemas/sanity-utils'
 import { ArticlesProps } from '@/types/Articles'
 import { Article, FeaturedArticles } from '@/components/articles'
 import { AnimatedText } from '@/components/common'
 import { Meta } from '@/components/Meta'
+import { LampContainer } from '@/src/components/ui/LampContainer'
 
 const ArticlePage: React.FC<ArticlesProps> = ({ articles }) => {
   return (
@@ -22,11 +24,12 @@ const ArticlePage: React.FC<ArticlesProps> = ({ articles }) => {
         ogType={'website'}
         ogUrl={'https://marowmacaulay.me/articles'}
       />
-      <main className='w-full mb-16 dark:my-0 flex flex-col items-center min-h-screen overflow-hidden'>
-        <Layout className='pt-16'>
+      <main className='w-full flex flex-col items-center min-h-screen mb-16 dark:my-0'>
+        <Layout>
+          <LampContainer />
           <AnimatedText
             text='Words are medicine to the soul!'
-            className='text-[44px] sm:text-5xl lg:text-7xl mb-16'
+            className='text-4xl mt-8 sm:text-5xl lg:text-7xl z-50 mb-16'
             centered
           />
           <ul className='grid grid-cols-2 gap-16'>
@@ -43,7 +46,7 @@ const ArticlePage: React.FC<ArticlesProps> = ({ articles }) => {
               />
             ))}
           </ul>
-          <h2 className='font-bold text-4xl w-full text-center my-16 mt-20 sm:mt-32 dark:text-slate-400'>
+          <h2 className='font-bold text-4xl w-full text-center my-16 mt-20 sm:mt-32 dark:text-white'>
             All articles
           </h2>
           <ul>

@@ -4,6 +4,7 @@ import { getProjects } from '@/sanity/schemas/sanity-utils'
 import { ProjectProps } from '@/types/Project'
 import { FeaturedProject } from '@/components/projects'
 import { Meta } from '@/components/Meta'
+import { LampContainer } from '../components/ui/LampContainer'
 
 const Projects: React.FC<ProjectProps> = ({ data, seo }) => {
   const { description, title, keywords, ogImage, ogTitle, ogType, ogUrl } = seo
@@ -20,16 +21,16 @@ const Projects: React.FC<ProjectProps> = ({ data, seo }) => {
         ogUrl={ogUrl}
       />
       <main className='w-full mb-16 dark:my-0 flex flex-col min-h-screen items-center'>
-        <Layout className='pt-16 sm:px-12'>
+        <Layout>
+          <LampContainer />
           <AnimatedText
             text='Imagination Trumps Knowledge!'
             centered
-            className='text-[44px] sm:text-5xl mb-8 lg:text-7xl sm:mb-16'
+            className='text-4xl mt-8 sm:text-5xl lg:text-7xl z-50 mb-16'
           />
-
           <div className='grid grid-cols-12 gap-x-0 gap-y-24 sm:gap-x-8 md:gap-x-12 sm:gap-y-32 md:gap-24 md:gap-y-32 my-12 sm:my-0 dark:mb-12'>
             {data.map(({ url, name, image, featured, githubUrl, summary, tools }, idx) => (
-              <div key={idx} className='col-span-12'>
+              <div key={idx} className='col-span-12 xl:col-span-6 z-50'>
                 <FeaturedProject
                   url={url}
                   name={name}
