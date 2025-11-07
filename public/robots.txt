@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://marowmacaulay.me/
+
+# Sitemaps
+Sitemap: https://marowmacaulay.me/sitemap.xml

@@ -1,29 +1,60 @@
 import { useEffect, useRef } from 'react'
-import { useInView, useMotionValue, useSpring } from 'framer-motion'
 import { AnimatedNumbersProps } from '@/types/About'
 
 const AnimatedNumbers: React.FC<AnimatedNumbersProps> = ({ value }) => {
-  const ref = useRef<HTMLElement>(null)
-
-  const motionValue = useMotionValue(0)
-  const springValue = useSpring(motionValue, { duration: 3000 })
-  const isInView = useInView(ref, { once: true })
+  const ref = useRef<HTMLSpanElement>(null)
+  const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (isInView) {
-      motionValue.set(value)
-    }
-  }, [value, isInView, motionValue])
+    const element = ref.current
+    if (!element || hasAnimated.current) return
 
-  useEffect(() => {
-    springValue.on('change', (latest: number) => {
-      if (ref.current && Number(latest.toFixed(0)) <= value) {
-        ref.current.textContent = latest.toFixed(0)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            hasAnimated.current = true
+            animateNumber(element, value)
+            observer.disconnect()
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '50px' },
+    )
+
+    observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [value])
+
+  const animateNumber = (element: HTMLSpanElement, targetValue: number) => {
+    const duration = 2000 // 2 seconds for smooth animation
+    const startTime = performance.now()
+    const startValue = 0
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+
+      // Easing function for smooth animation
+      const easeOut = 1 - Math.pow(1 - progress, 3)
+      const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOut)
+
+      element.textContent = currentValue.toLocaleString()
+
+      if (progress < 1) {
+        requestAnimationFrame(animate)
       }
-    })
-  }, [springValue, value])
+    }
 
-  return <span ref={ref}></span>
+    requestAnimationFrame(animate)
+  }
+
+  return (
+    <span ref={ref} className='inline-block font-mono tabular-nums'>
+      0
+    </span>
+  )
 }
 
 export default AnimatedNumbers

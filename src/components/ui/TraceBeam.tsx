@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion, useTransform, useScroll, useSpring } from 'framer-motion'
 import { cn } from '@/utils/cn'
 import { useTheme } from 'next-themes'

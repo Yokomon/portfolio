@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
-import type { Container, SingleOrMultiple } from '@tsparticles/engine'
+import type {
+  Container,
+  IResizeEvent,
+  RecursivePartial,
+  SingleOrMultiple,
+} from '@tsparticles/engine'
 import { loadSlim } from '@tsparticles/slim'
 import { motion, useAnimation } from 'framer-motion'
 
@@ -72,7 +77,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                   enable: false,
                   mode: 'repulse',
                 },
-                resize: true as any,
+                resize: true as unknown as RecursivePartial<IResizeEvent>,
               },
               modes: {
                 push: {
