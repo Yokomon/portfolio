@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app'
+import { Analytics } from '@vercel/analytics/next'
 import { Montserrat } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 
@@ -34,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <NavBar />
           <Component {...pageProps} />
           <Footer />
+          <Analytics />
         </div>
       </main>
     </ThemeProvider>
