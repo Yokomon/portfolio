@@ -3,12 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-} from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { AiFillGithub } from 'react-icons/ai'
@@ -435,7 +430,23 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                     className='relative'
                   >
-                    <Link href={project.url} target='_blank'>
+                    {project.url ? (
+                      <Link href={project.url} target='_blank'>
+                        <div className='relative aspect-[16/10] rounded-3xl sm:rounded-4xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 shadow-2xl group-hover:shadow-3xl transition-all duration-500'>
+                          <div className='project-image absolute inset-0 transform-gpu'>
+                            <Image
+                              src={project.image.url}
+                              alt={project.name}
+                              fill
+                              className='object-cover transition-transform duration-700'
+                              sizes='(max-width: 768px) 100vw, 50vw'
+                            />
+                          </div>
+
+                          <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
+                        </div>
+                      </Link>
+                    ) : (
                       <div className='relative aspect-[16/10] rounded-3xl sm:rounded-4xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 shadow-2xl group-hover:shadow-3xl transition-all duration-500'>
                         <div className='project-image absolute inset-0 transform-gpu'>
                           <Image
@@ -449,7 +460,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
 
                         <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
                       </div>
-                    </Link>
+                    )}
 
                     <div className='card-glow absolute -inset-3 bg-gradient-to-br from-orange-500/15 to-red-500/15 dark:from-orange-400/8 dark:to-red-400/8 rounded-3xl sm:rounded-4xl blur-xl -z-10 opacity-0 transition-opacity duration-300' />
                   </motion.div>
@@ -476,11 +487,17 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                   )}
 
                   <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
-                    <Link href={project.url} target='_blank'>
+                    {project.url ? (
+                      <Link href={project.url} target='_blank'>
+                        <h3 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-dark dark:text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-orange-600 group-hover:to-red-600 group-hover:bg-clip-text transition-all duration-300 leading-tight'>
+                          {project.name}
+                        </h3>
+                      </Link>
+                    ) : (
                       <h3 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-dark dark:text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-orange-600 group-hover:to-red-600 group-hover:bg-clip-text transition-all duration-300 leading-tight'>
                         {project.name}
                       </h3>
-                    </Link>
+                    )}
                   </motion.div>
 
                   <motion.div
@@ -530,40 +547,44 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects }) => {
                     transition={{ duration: 0.6, delay: 0.7 }}
                     className='flex flex-wrap gap-4 sm:gap-5 pt-4'
                   >
-                    <motion.div
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Link
-                        href={project.url}
-                        target='_blank'
-                        className='group/btn relative inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-orange-600 via-orange-500 to-red-600 dark:from-orange-500 dark:via-orange-600 dark:to-red-500 text-white text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden'
+                    {project.url && (
+                      <motion.div
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
                       >
-                        <div className='absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300' />
-                        <span className='relative z-10'>View Project</span>
-                        <HiExternalLink
-                          className='relative z-10 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300'
-                          size={20}
-                        />
-                      </Link>
-                    </motion.div>
+                        <Link
+                          href={project.url}
+                          target='_blank'
+                          className='group/btn relative inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-orange-600 via-orange-500 to-red-600 dark:from-orange-500 dark:via-orange-600 dark:to-red-500 text-white text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden'
+                        >
+                          <div className='absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300' />
+                          <span className='relative z-10'>View Project</span>
+                          <HiExternalLink
+                            className='relative z-10 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300'
+                            size={20}
+                          />
+                        </Link>
+                      </motion.div>
+                    )}
 
-                    <motion.div
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Link
-                        href={project.githubUrl}
-                        target='_blank'
-                        className='group/btn relative inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-white/90 dark:bg-slate-800/90 text-dark dark:text-white text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl border-2 border-dark/20 dark:border-slate-700 hover:border-orange-500 dark:hover:border-orange-500 shadow-lg hover:shadow-xl backdrop-blur-sm transition-all duration-300 overflow-hidden'
+                    {project.githubUrl && (
+                      <motion.div
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
                       >
-                        <div className='absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300' />
-                        <AiFillGithub className='relative z-10' size={22} />
-                        <span className='relative z-10'>Source Code</span>
-                      </Link>
-                    </motion.div>
+                        <Link
+                          href={project.githubUrl}
+                          target='_blank'
+                          className='group/btn relative inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-white/90 dark:bg-slate-800/90 text-dark dark:text-white text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl border-2 border-dark/20 dark:border-slate-700 hover:border-orange-500 dark:hover:border-orange-500 shadow-lg hover:shadow-xl backdrop-blur-sm transition-all duration-300 overflow-hidden'
+                        >
+                          <div className='absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300' />
+                          <AiFillGithub className='relative z-10' size={22} />
+                          <span className='relative z-10'>Source Code</span>
+                        </Link>
+                      </motion.div>
+                    )}
                   </motion.div>
                 </div>
               </div>
