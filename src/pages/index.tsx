@@ -60,6 +60,7 @@ export async function getStaticProps() {
       aboutData,
       projects: projectsData.items,
     },
+    revalidate: 10,
   }
 }
 
